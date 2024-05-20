@@ -33,7 +33,8 @@ export const WeatherInfo = ({ location }: { location?: GeoLocation }) => {
     <div>
       <div>
         <div>Today&apos;s Forecast</div>
-        <div style={{ display: "flex", overflowY: "scroll", width: "30rem" }}>
+
+        <div className="flex overflow-y-scroll">
           {hourlyData?.time.map((time, index) => {
             return (
               <div key={time}>
@@ -53,7 +54,7 @@ export const WeatherInfo = ({ location }: { location?: GeoLocation }) => {
         <div>Air conditions</div>
         <div>
           <div>
-            <div>Real Feel</div>
+            <div className="h2">Real Feel</div>
             <div></div>
           </div>
           <div>

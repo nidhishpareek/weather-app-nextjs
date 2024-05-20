@@ -10,10 +10,10 @@ const queryClient = new QueryClient();
 
 export default function Home() {
   return (
-    <main className={`${styles.main} ${inter.className}`}>
-      <QueryClientProvider client={queryClient}>
-        <Weather />
-      </QueryClientProvider>
-    </main>
+    // <main>
+    <QueryClientProvider client={queryClient}>
+      <Weather />
+    </QueryClientProvider>
+    // </main>
   );
 }

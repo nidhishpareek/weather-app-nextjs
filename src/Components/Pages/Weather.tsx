@@ -6,9 +6,14 @@ import { WeatherInfo } from "../WeatherInfo";
 export const Weather = () => {
   const [geoLocation, setGeoLocation] = useState<GeoLocation>();
   return (
-    <div>
-      <Search setGeoLocation={(val) => setGeoLocation(val)} />
-      <WeatherInfo location={geoLocation} />
+    <div className="flex" style={{ width: "100%", height: "100vh" }}>
+      <div className="border border-info border-start-0 rounded-end .sidebar">
+        sdafasdf;sdaf
+      </div>
+      <div>
+        <Search setGeoLocation={(val) => setGeoLocation(val)} />
+        <WeatherInfo location={geoLocation} />
+      </div>
     </div>
   );
 };
