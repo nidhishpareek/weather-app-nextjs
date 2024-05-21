@@ -1,12 +1,18 @@
 const nextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: "https",
+  //       hostname: "openweathermap.org",
+  //       // pathname: "**",
+  //     },
+  //   ],
+  // },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "openweathermap.org",
-        pathname: "**",
-      },
-    ],
+    unoptimized: true,
   },
 };
 

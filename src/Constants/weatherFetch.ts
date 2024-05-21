@@ -17,12 +17,22 @@ const dailyFields = [
 const hourlyProperties = [
   "temperature_2m",
   "apparent_temperature",
-  "precipitation_probability",
   "rain",
   "weather_code",
   "wind_direction_180m",
   "temperature_180m",
   "is_day",
+  "wind_speed_10m",
+];
+const currentProperties = [
+  "temperature_2m",
+  "apparent_temperature",
+  "is_day",
+  "precipitation",
+  "rain",
+  "weather_code",
+  "wind_speed_10m",
+  "precipitation_probability",
 ];
 export const getWeatherQueryParam = (location?: GeoLocation) =>
   qs.stringify({
@@ -30,4 +40,5 @@ export const getWeatherQueryParam = (location?: GeoLocation) =>
     hourly: hourlyProperties.join(","),
     daily: dailyFields.join(","),
     timezone: "Asia/Calcutta",
+    current: currentProperties.join(","),
   });
