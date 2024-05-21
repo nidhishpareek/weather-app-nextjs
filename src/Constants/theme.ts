@@ -4,6 +4,7 @@ export const COLORS = {
   white: "#f7f4f9",
   grey: "#eeebee",
   darkGrey: "#a4a2a7",
+  borderGrey: "#ceccd1",
 };
 
 export const BORDER_RADIUS = {

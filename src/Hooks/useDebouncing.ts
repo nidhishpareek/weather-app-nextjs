@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import debounce from "lodash/debounce";
 
-export const useDebouncing = (debounceTime = 1000, initialValue = "") => {
+export const useDebouncing = ({
+  initialValue = "",
+  debounceTime = 1000,
+} = {}) => {
   const [inputValue, setInputValue] = useState(initialValue);
   const [value, setValue] = useState(initialValue);
 

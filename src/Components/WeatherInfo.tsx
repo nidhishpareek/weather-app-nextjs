@@ -1,97 +1,39 @@
-import axios from "axios";
 import dayjs from "dayjs";
-import { useQuery } from "@tanstack/react-query";
 import { FaDroplet, FaSun, FaTemperatureFull, FaWind } from "react-icons/fa6";
 
-import type { GeoLocation } from "@/Types";
-import { WEATHER_DATA_URL, getWeatherQueryParam } from "@/Constants";
 import { WeatherDataResponse } from "@/Types/weatherInfo";
 import { WeatherIcon } from "./WeatherIcon";
-import styled from "styled-components";
-import { BORDER_RADIUS, COLORS, media } from "@/Constants/theme";
+import {
+  AirCondition,
+  AirConditionsCard,
+  WrapperHeadings,
+  TodaysDetailsCard,
+  WeatherInfoWrapper,
+  TodaysForecast,
+  HourlyWeatherWrapper,
+  Time,
+  Temperature,
+  CurrentWeather,
+  CurrentTempCity,
+  CurrentTemp,
+  CurrentCity,
+  SecondaryText,
+} from "./UI";
+import { GeoLocation } from "@/Types";
 
-const TodaysForcast = styled.div`
-  display: flex;
-  flex-direction: row;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  width: 100%;
-  gap: 1rem;
-`;
-const TodaysDetailsCard = styled.section`
-  border-radius: ${BORDER_RADIUS.lg};
-  background-color: ${COLORS.grey};
-  padding: 1rem;
-`;
-const TodayDetailsHeading = styled.h6`
-  color: ${COLORS.darkGrey};
-  font-weight: 600;
-`;
-const HourlyWeatherWrapper = styled.div`
-  padding: 1rem;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  /* gap: 0.25rem; */
-  justify-content: center;
-  align-items: center;
-  min-width: 8rem;
-  &::after {
-    content: "";
-    background-color: black; /* Change color as desired */
-    background-color: ${COLORS.darkGrey};
-    opacity: 0.5;
-    height: 90%;
-    align-self: center;
-    width: 1px; /* Adjust bar thickness */
-    position: absolute;
-    /* top: 50%; */
-    right: -0.5rem;
-    /* transform: translateY(-50%); Center the bar vertically */
-  }
-`;
-const Temperature = styled.h4`
-  font-weight: 600;
-`;
-const Time = styled.span`
-  color: ${COLORS.darkGrey};
-`;
-const WeatherInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-const AirConditionsCard = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2rem;
-  ${media.tablet`
-    grid-template-columns: 1fr;
-  `}
-`;
-const AirCondition = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-`;
-export const WeatherInfo = ({ location }: { location?: GeoLocation }) => {
+export const WeatherInfo = ({
+  weatherData,
+  geoLocation,
+}: {
+  weatherData?: WeatherDataResponse;
+  geoLocation?: GeoLocation;
+}) => {
   //   console.log({ queryParams });
-  const getWeatherData = async () =>
-    await axios.get(
-      `${WEATHER_DATA_URL}/forecast?${getWeatherQueryParam(location)}`
-    );
-  const {
-    data: weatherData,
-    error,
-    isLoading,
-  } = useQuery<{ data: WeatherDataResponse }>({
-    queryKey: [location],
-    queryFn: getWeatherData,
-    enabled: !!location?.latitude && !!location?.longitude,
-  });
-  const hourlyData = weatherData?.data.hourly;
-  const dailyData = weatherData?.data.daily;
-  const currentData = weatherData?.data.current;
+
+  const hourlyData = weatherData?.hourly;
+  const dailyData = weatherData?.daily;
+  const currentData = weatherData?.current;
+  const currentUnits = weatherData?.current_units;
   // const ob = convertToPairs(hourlydata)
   const airConditions = [
     {
@@ -115,14 +57,33 @@ export const WeatherInfo = ({ location }: { location?: GeoLocation }) => {
       icon: FaSun,
     },
   ];
-  //   console.log("geoLocation", location);
-  // console.log("weatherData", weatherData);
+
   return (
     <WeatherInfoWrapper>
+      <CurrentWeather>
+        <CurrentTempCity>
+          <div>
+            <CurrentCity>{geoLocation?.city}</CurrentCity>
+            <SecondaryText>
+              Chances of rain: {currentData?.precipitation_probability}
+            </SecondaryText>
+          </div>
+          <CurrentTemp>
+            {currentData?.temperature_2m}
+            {currentUnits?.temperature_2m}
+          </CurrentTemp>
+        </CurrentTempCity>
+        <WeatherIcon
+          isDay={currentData?.is_day ? 1 : 0}
+          weatherCode={currentData?.weather_code || 0}
+          height={210}
+          width={210}
+        />
+      </CurrentWeather>
       <TodaysDetailsCard>
-        <TodayDetailsHeading>TODAY&apos;S FORECAST</TodayDetailsHeading>
+        <WrapperHeadings>TODAY&apos;S FORECAST</WrapperHeadings>
 
-        <TodaysForcast>
+        <TodaysForecast>
           {hourlyData?.time.map((time, index) => {
             return (
               <HourlyWeatherWrapper key={time}>
@@ -135,10 +96,10 @@ export const WeatherInfo = ({ location }: { location?: GeoLocation }) => {
               </HourlyWeatherWrapper>
             );
           })}
-        </TodaysForcast>
+        </TodaysForecast>
       </TodaysDetailsCard>
       <TodaysDetailsCard>
-        <TodayDetailsHeading>Air conditions</TodayDetailsHeading>
+        <WrapperHeadings>Air conditions</WrapperHeadings>
         <AirConditionsCard>
           {airConditions.map((condition) => (
             <AirCondition key={condition.title}>
