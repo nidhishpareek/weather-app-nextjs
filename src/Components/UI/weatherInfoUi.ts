@@ -17,7 +17,7 @@ export const TodaysDetailsCard = styled.section`
 `;
 
 export const HourlyWeatherWrapper = styled.div`
-  padding: 1rem;
+  padding: 0.75rem;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -61,22 +61,25 @@ export const AirConditionsCard = styled.div`
 export const AirCondition = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.75rem;
 `;
 
 export const CurrentWeather = styled.div`
   padding-inline: 1.5rem;
-  min-height: 11rem;
+  min-height: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${media.tablet`
+    padding-inline: 1rem;
+  `}
 `;
 
 export const CurrentTempCity = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
 `;
 export const CurrentTemp = styled.h1`
   font-weight: 700;

@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import StyledComponentsRegistry from "@/lib/registry";
+import { COLORS } from "@/Constants/theme";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={inter.className}
+        style={{ background: "#f7f4f9", width: "100%", height: "100%" }}
+      >
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>

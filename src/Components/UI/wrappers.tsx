@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 1.5rem;
+  padding: 1rem;
+  min-height: 100%;
   gap: 1rem;
   ${media.desktop`
     flex-direction: column;
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   `}
 `;
 
-export const Sidebar = styled.div`
+export const SidebarUi = styled.div`
   width: 6rem;
   border-radius: ${BORDER_RADIUS.lg};
   background-color: ${COLORS.grey};
@@ -20,10 +21,12 @@ export const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  color: ${COLORS.darkGrey};
   ${media.desktop`
     display:none;
-  `}
+  `};
 `;
 
 export const SearchNWeather = styled.div`

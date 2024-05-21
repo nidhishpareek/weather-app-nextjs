@@ -1,14 +1,16 @@
+import axios from "axios";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import type { GeoLocation } from "@/Types";
+import type { WeatherDataResponse } from "@/Types/weatherInfo";
+import { WEATHER_DATA_URL, getWeatherQueryParam } from "@/Constants";
+
 import { Search } from "../Search";
 import { WeatherInfo } from "../WeatherInfo";
-import { SearchNWeather, Sidebar, Wrapper } from "../UI";
-import { WEATHER_DATA_URL, getWeatherQueryParam } from "@/Constants";
-import axios from "axios";
-import { WeatherDataResponse } from "@/Types/weatherInfo";
-import { useQuery } from "@tanstack/react-query";
-import { Forecast } from "../Forcast";
+import { SearchNWeather, Wrapper } from "../UI";
+import { Forecast } from "../Forecast";
+import { Sidebar } from "../Sidebar";
 
 export const Weather = () => {
   const [geoLocation, setGeoLocation] = useState<GeoLocation>({
@@ -31,7 +33,7 @@ export const Weather = () => {
   });
   return (
     <Wrapper>
-      <Sidebar>sidbar</Sidebar>
+      <Sidebar />
       <SearchNWeather>
         <Search setGeoLocation={(val) => setGeoLocation(val)} />
         <WeatherInfo
