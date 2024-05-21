@@ -8,7 +8,7 @@ import { WEATHER_DATA_URL, getWeatherQueryParam } from "@/Constants";
 import { WeatherDataResponse } from "@/Types/weatherInfo";
 import { WeatherIcon } from "./WeatherIcon";
 import styled from "styled-components";
-import { BORDER_RADIUS, COLORS } from "@/Constants/theme";
+import { BORDER_RADIUS, COLORS, media } from "@/Constants/theme";
 
 const TodaysForcast = styled.div`
   display: flex;
@@ -65,6 +65,9 @@ const AirConditionsCard = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
+  ${media.tablet`
+    grid-template-columns: 1fr;
+  `}
 `;
 const AirCondition = styled.div`
   display: flex;
